@@ -1,0 +1,268 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    background-color: #051633;
+    overflow-x: hidden;
+    font-family: 'Montserrat', sans-serif ;
+}
+
+div.emoji{
+    display: flex;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    background: url(../image/emoji.png) no-repeat;
+    background-size: 100%;
+    position: relative;
+}
+
+h1.line{
+  font-size: 1.125rem;
+  color: #fff;
+  border-right: 2px solid rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.cursor-animado{
+  animation: cursor-blink .8s infinite normal, digitando 3s steps(40) normal;
+}
+
+.behavior{
+  animation: behavior .8s normal;
+}
+
+
+@keyframes behavior{
+  from{
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes digitando {
+  from {
+    width: 0;
+  }
+
+  to{
+    width: 17rem;
+  }
+  
+}
+
+@keyframes cursor-blink {
+  from{
+    border-right-color: rgba(255, 255, 255, .75);
+
+  }
+  to{
+    border-right-color: transparent;
+  }
+}
+
+
+section.redes-sociais div{
+    height: 150px;
+    background-color: red;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+section.redes-sociais div:active{
+    transform: translateY(-1px);
+}
+
+
+
+
+
+section.redes-sociais div:nth-child(1){
+    background-color: #FBDA61;
+    background-image: linear-gradient(45deg, #fdc54c 0%, #fd5779 50%, #FF5ACD 100%);
+    filter: contrast(1.5);
+}
+
+section.redes-sociais div:nth-child(2){
+    background-color: #21D4FD;
+    background-image: linear-gradient(19deg, #21D4FD 27%, #212dff 100%);
+}
+
+
+section.redes-sociais div:nth-child(3){
+    background-color: #ffb005;
+    background-image: linear-gradient(90deg, #ffb005 0%, #F76B1C 100%);
+    filter: contrast(1.5);
+}
+
+section.redes-sociais div:nth-child(4){
+    background-color: #5f5f5f;
+    background-image: linear-gradient(19deg, #5f5f5f 0%, #202121 100%);
+    filter: contrast(1.5);
+}
+
+section.redes-sociais div a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    text-decoration: none;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    user-select: none;
+}
+
+section.redes-sociais div a:hover{
+    transition: all .3s;
+    transform: scale(1.03);
+}
+
+.mt-6{
+    margin-top: 5rem;
+}
+
+
+/* inicio estilizacao projetos.html */
+
+.row {
+  margin: 50px auto 0;
+}
+
+
+.card-projeto .wrapper {
+  background-color: #fff;
+  min-height: 400px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
+  border-radius:5px;
+}
+.card-projeto .wrapper:hover .data {
+  transform: translateY(0);
+}
+
+.card-projeto .data {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transform: translateY(calc(70px + 1em));
+  transition: transform 0.3s;
+}
+
+.card-projeto .author {
+  font-size: 12px;
+}
+.card-projeto .title {
+  margin-top: 10px;
+}
+.card-projeto .text {
+  height: 70px;
+  margin: 0;
+}
+
+.card-projeto .content{
+  backdrop-filter: blur(2px);
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  user-select: none;
+}
+
+
+.projeto:nth-child(1) .wrapper {
+  background: url("../image/calculadora-v1.jpg") center / cover no-repeat;
+}
+
+.projeto:nth-child(2) .wrapper {
+  background: url("../image/calculadora-v2.jpg") center / cover no-repeat;
+}
+
+.projeto:nth-child(3) .wrapper {
+  background: url("../image/validador.jpg") center / cover no-repeat;
+  backdrop-filter: blur(2px);
+}
+
+.projeto:nth-child(4) .wrapper {
+  background: url("../image/jogo.jpg") center / cover no-repeat;
+  backdrop-filter: blur(2px);
+}
+
+.projeto .data {
+  color: #fff;
+  transform: translateY(calc(70px + 4em));
+}
+
+.projeto .title a {
+  color: #fff;
+}
+
+.projeto .button {
+  display: block;
+  width: 100px;
+  margin: 1rem auto 1em;
+  text-align: center;
+  font-size: 1rem;
+  color: #fff;
+  line-height: 1;
+  position: relative;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.projeto .button:hover{
+  text-decoration: underline;
+}
+
+.projeto .button::after {
+  content: "\2192";
+  opacity: 0;
+  position: absolute;
+  right: -15px;
+  top: 50%;
+  transform: translate(0, -50%);
+  transition: all 0.3s;
+}
+
+.projeto .button:hover::after {
+  transform: translate(5px, -50%);
+  opacity: 1;
+}
+
+h1.title-projeto::after{
+  display: block;
+  content: "";
+  margin-top: 5px;
+  width: 10%;
+  height: 2px;
+  background-color: #fff;
+  transition: all 0.2s;
+  animation: transicao .3s ease-out; 
+}
+
+
+@keyframes transicao {
+  from{
+    width: 0;
+  }
+
+  to{
+    width: 10%;
+  }
+  
+}
+

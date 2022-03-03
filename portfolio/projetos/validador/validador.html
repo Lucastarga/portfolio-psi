@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador</title>
+    <link rel="stylesheet" href="./style.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+    <main>
+
+        <div class="container-form">
+            <fieldset>
+                <legend>Validação</legend>
+
+                <form id="form-validator" action="">
+                    <div class="center">
+                        <label for="input-date">Digite o ano de seu nascimento:</label>
+                        <input id="input-date" type="number" name="date" >
+                    </div>
+    
+                    <div class="center">
+                        <label for="">Sexo:</label>
+                        <input type="radio" name="sexo" value="M" >Masculino </input>
+                        <input type="radio" name="sexo" value="F" >Feminino</input>
+                    </div>
+
+                    <div class="center">
+                        <input id="enviar" type="submit" value="Verificar">
+                        <input id="reset" type="reset" value="Limpar">
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+
+
+        <div class="container-result"> 
+
+            <div class="text-result">
+                <p class="resultado"></p>
+                
+            </div>
+
+            <div class="img-result">
+                <img class="img-resultado" src="" alt="">
+            </div>
+
+            <small>&copy Lucas Targa </small>
+
+        </div>
+
+    </main>
+
+    
+        
+
+    <script src="./script.js"></script>
+    
+</body>
+</html>

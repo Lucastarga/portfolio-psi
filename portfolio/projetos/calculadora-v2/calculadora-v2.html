@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Lucas Targa" />
+    <title>Calculadora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/ultraviolet/40/000000/calculator.png"
+      type="image/x-icon"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+        background-color: #8bc6ec;
+        background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+        font-family: "Mulish", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      main.container {
+        width: 40rem;
+        height: max-content;
+        padding: 5px 10px;
+        border-radius: 15px;
+        background-color: #000;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 5px 5px 25px 5px rgba(0, 0, 0, 0.8);
+        overflow-x: hidden;
+      }
+
+      div.painel {
+        max-width: 100%;
+        height: 150px;
+        padding: 15px 15px;
+        color: #fff;
+        font-weight: 200;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        text-align: end;
+        overflow-x: scroll;
+      }
+
+      div.painel::-webkit-scrollbar {
+        height: 5px;
+      }
+
+      div.painel::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      div.painel::-webkit-scrollbar-thumb {
+        background-color: #e0e0e094;
+        border-radius: 20px;
+      }
+
+      div.painel small {
+        display: block;
+        min-height: 40%;
+        font-size: 2rem;
+      }
+
+      div.painel p {
+        display: block;
+        min-height: 50%;
+        font-size: 4rem;
+        margin-bottom: 10px;
+      }
+
+      div.painel p:empty:not(:focus)::before {
+        content: attr(data-placeholder);
+      }
+
+      div.container-botoes {
+        width: 100%;
+        height: 80%;
+        padding: 15px 15px;
+      }
+
+      div.operadores {
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 15px;
+        margin-bottom: 15px;
+        position: relative;
+      }
+
+      div.botao {
+        width: 95px;
+        height: 95px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.25rem;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      div.operador {
+        background-color: #b8b8b7;
+        color: #000;
+      }
+
+      div.operador:hover {
+        background-color: rgba(184, 184, 183, 0.8);
+      }
+
+      div.operador:active {
+        font-weight: bold;
+      }
+
+      div.number {
+        background-color: #333333;
+        color: #fff;
+      }
+
+      div.number:hover {
+        background-color: rgba(71, 71, 71, 0.6);
+      }
+
+      div.number:active {
+        font-weight: bold;
+      }
+
+      div.left-painel {
+        width: 80%;
+        min-height: 100%;
+      }
+
+      div.botoes {
+        width: 100%;
+        display: flex;
+        height: max-content;
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+
+      div.resultado {
+        width: 20%;
+        min-height: 100%;
+      }
+
+      div.container-numeros {
+        width: 100%;
+        height: 100%;
+        display: flex;
+      }
+
+      div.btn-igual {
+        width: 100%;
+        height: calc(100% - 15px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+        background-color: #fe9f0a;
+        color: #fff;
+        font-size: 2.25rem;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      div.btn-igual:hover {
+        background-color: rgba(254, 160, 10, 0.9);
+      }
+
+      div.btn-igual:active {
+        font-weight: bold;
+      }
+
+      div.btn-limpar {
+        width: 120px;
+        height: 95px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.25rem;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        position: absolute;
+        right: 0;
+        border-radius: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <div id="painel" class="painel">
+        <small class="operacao"></small>
+        <p class="resultado" data-placeholder="0"></p>
+      </div>
+
+      <div class="container-botoes">
+        <div class="operadores">
+          <div value="^" class="botao operador btn-quadrado">x²</div>
+          <div value="raiz" class="botao operador btn-raiz">√</div>
+          <div value="(" class="botao operador btn-operador">(</div>
+          <div value=")" class="botao operador btn-operador">)</div>
+          <div class="operador btn-limpar">⟵</div>
+        </div>
+
+        <div class="container-numeros">
+          <div class="left-painel">
+            <div class="botoes">
+              <div value="7" class="botao number btn-number">7</div>
+              <div value="8" class="botao number btn-number">8</div>
+              <div value="9" class="botao number btn-number">9</div>
+              <div value="+" class="botao operador btn-operador">+</div>
+            </div>
+
+            <div class="botoes">
+              <div value="4" class="botao number btn-number">4</div>
+              <div value="5" class="botao number btn-number">5</div>
+              <div value="6" class="botao number btn-number">6</div>
+              <div value="-" class="botao operador btn-operador">-</div>
+            </div>
+
+            <div class="botoes">
+              <div value="1" class="botao number btn-number">1</div>
+              <div value="2" class="botao number btn-number">2</div>
+              <div value="3" class="botao number btn-number">3</div>
+              <div value="*" class="botao operador btn-operador">×</div>
+            </div>
+
+            <div class="botoes">
+              <div value="0" class="botao number btn-number">0</div>
+              <div value="." class="botao number btn-number">.</div>
+              <div value="c" class="botao number btn-reset">C</div>
+              <div value="/" class="botao operador btn-operador">÷</div>
+            </div>
+          </div>
+
+          <div class="resultado">
+            <div value="=" class="btn-igual">=</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const set_operacao = document.querySelector(".operacao");
+      const set_resultado = document.querySelector(".resultado");
+      const btn_calculator = document.querySelectorAll(
+        ".btn-number,.btn-operador"
+      );
+      let resultado = "";
+      let operacao = "";
+
+      /// funcao para exibir os valores clicados no painel da calculadora
+      function imprimirValor() {
+        function setPainel(event) {
+          let valorBotao = this.getAttribute("value");
+          if (
+            valorBotao !== "*" &&
+            valorBotao !== "+" &&
+            valorBotao !== "-" &&
+            valorBotao !== "/" 
+          ) {
+              set_resultado.textContent += valorBotao;
+            } 
+          else {
+            if (set_resultado.textContent == "" || valorBotao == ".") {
+              null;
+            } else if (set_resultado.textContent == resultado) {
+              resultado = "";
+              operacao = "";
+              operacao += set_resultado.textContent + valorBotao;
+              set_operacao.textContent = operacao;
+              set_resultado.textContent = "";
+            } else {
+              operacao += set_resultado.textContent + valorBotao;
+              set_operacao.textContent = operacao;
+              set_resultado.textContent = "";
+            }
+          }
+        }
+
+        btn_calculator.forEach((item) => {
+          item.addEventListener("click", setPainel);
+        });
+      }
+      imprimirValor();
+
+      /// funcao que calcula a operacao e exibe o calculo no painel da calculadora
+      function calcular() {
+        const btn_igual = document.querySelector(".btn-igual");
+
+        function exibirResultado() {
+          // verifica se o botao de igual ja foi apertado, executa a acao caso nao tenha sido
+          // isso evita ficar sobreescrevendo valores infinitamente
+          if (
+            set_operacao.textContent.charAt(
+              set_operacao.textContent.length - 1
+            ) !== "=" &&
+            set_operacao.textContent.charAt(
+              set_operacao.textContent.length - 1
+            ) !== "²" &&
+            set_operacao.textContent.charAt(0) !== "√" &&
+            set_operacao.textContent !== ""
+          ) {
+            let valorBotao = this.getAttribute("value");
+            operacao += set_resultado.textContent;
+            resultado = eval(operacao);
+            set_operacao.textContent += set_resultado.textContent + valorBotao;
+            set_resultado.textContent = resultado;
+          }
+        }
+
+        btn_igual.addEventListener("click", exibirResultado);
+      }
+      calcular();
+
+      /// funcao para zerar o painel e os calculos
+      function zerarCalculo() {
+        const btn_reset = document.querySelector(".btn-reset");
+
+        function apagaPainel(event) {
+          set_resultado.textContent = "";
+          set_operacao.textContent = "";
+          resultado = "";
+          operacao = "";
+        }
+
+        btn_reset.addEventListener("click", apagaPainel);
+      }
+      zerarCalculo();
+
+      /// funcao para apagar o ultimo digito do painel
+      function apagarDigito() {
+        const btn_apagar = document.querySelector(".btn-limpar");
+
+        function apagar(event) {
+          if (
+            set_resultado.textContent == resultado ||
+            set_operacao.textContent.charAt(
+              set_operacao.textContent.length - 1
+            ) == "²"
+          ) {
+            set_resultado.textContent = "";
+            set_operacao.textContent = "";
+            operacao = "";
+          } else {
+            set_resultado.textContent = set_resultado.textContent.substring(
+              0,
+              set_resultado.textContent.length - 1
+            );
+          }
+        }
+
+        btn_apagar.addEventListener("click", apagar);
+      }
+      apagarDigito();
+
+      /// funcao para calcular a raiz quadrada do numero exibido no painel
+      function calculoRaizQuadrada() {
+        const btn_raiz = document.querySelector(".btn-raiz");
+
+        function raizQuadrada(event) {
+          if (set_resultado.textContent !== "") {
+            set_operacao.textContent = "";
+            set_operacao.textContent = `${this.textContent} ${set_resultado.textContent}`;
+            resultado = Math.sqrt(set_resultado.textContent);
+            set_resultado.textContent = resultado;
+            operacao = "";
+          }
+        }
+
+        btn_raiz.addEventListener("click", raizQuadrada);
+      }
+      calculoRaizQuadrada();
+
+      /// funcao para calcular o quadrado do numero exibido no painel
+      function calculoElevaQuadrado() {
+        const btn_quadrado = document.querySelector(".btn-quadrado");
+
+        function elevaQuadrado(event) {
+          if (set_resultado.textContent !== "") {
+            set_operacao.textContent = "";
+            set_operacao.textContent = `${set_resultado.textContent}²`;
+            set_resultado.textContent *= set_resultado.textContent;
+            operacao = "";
+          }
+        }
+
+        btn_quadrado.addEventListener("click", elevaQuadrado);
+      }
+      calculoElevaQuadrado();
+    </script>
+  </body>
+</html>
